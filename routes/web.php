@@ -4,9 +4,12 @@ use App\Http\Controllers\BiochimieController;
 use App\Http\Controllers\CardiologieController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\DocteursController;
 use App\Http\Controllers\HepatologieController;
 use App\Http\Controllers\NeurologieController;
+use App\Http\Controllers\PatientsController;
+use App\Http\Controllers\RendezvousController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +55,23 @@ Route::get('/hepatologie', function() {
 Route::get('/biochimie', function() {
     return view('biochimie');
 });
+
+Route::get('ajdocteurs', [DocteursController::class, 'ajdocteurs'])->name('ajdocteurs');
+Route::post('dashboard', [dashboardController::class, 'dashboard'])->name('dashboard');
+
+
+Route::get('ajdocteurs', [DocteursController::class, 'ajdocteurs'])->name('ajdocteurs');
+Route::post('docteurst', [DocteursController::class, 'docteurst'])->name('docteurst');
+Route::get('docteurs', [DocteursController::class, 'docteurs'])->name('docteurs');
+
+Route::get('ajpatients', [PatientsController::class, 'ajpatients'])->name('ajpatients');
+Route::post('patientst', [PatientsController::class, 'patientst'])->name('patientst');
+Route::get('patients', [PatientsController::class, 'patients'])->name('patients');
+
+Route::get('ajrendezvous', [RendezvousController::class, 'ajrendezvous'])->name('ajrendezvous');
+Route::post('rendezvoust', [RendezvousController::class, 'rendezvoust'])->name('rendezvoust');
+Route::get('rendezvous', [RendezvousController::class, 'rendezvous'])->name('rendezvous');
+
+Route::get('ajdocteurs', [DocteursController::class, 'ajdocteurs'])->name('ajdocteurs');
+Route::post('docteurst', [DocteursController::class, 'docteurst'])->name('docteurst');
+Route::get('docteurs', [DocteursController::class, 'docteurs'])->name('docteurs');

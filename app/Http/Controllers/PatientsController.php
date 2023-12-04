@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\patients;
 
-class dashboardController extends Controller
+class PatientsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function dashboard()
+    public function patients()
     {
-        return view('dashboard');
+        $patients = patients::all();
+        return view('patients.patients', compact('patients'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function ajpatients()
     {
         //
     }
@@ -25,7 +27,7 @@ class dashboardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function patientst(Request $request)
     {
         //
     }

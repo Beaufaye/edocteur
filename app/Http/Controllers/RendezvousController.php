@@ -3,31 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\rendezvous;
 
-class dashboardController extends Controller
+class RendezvousController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function dashboard()
+    public function rendezvous()
     {
-        return view('dashboard');
+        $rendezvous = rendezvous::all();
+        return view('rendez-vous.rendezvous', compact('rendezvous'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function ajrendezvous()
     {
-        //
+        return view('rendez-vous.rendezvous');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function rendezvoust(Request $request)
     {
-        //
+        $rendezvous = new rendezvous();
+        $rendezvous->nom = $request->nom;
+        $rendezvous->prenom = $request->prenom;
+        $rendezvous->fonction = $request->fonction;
+        $rendezvous->sexe = $request->sexe;
+        $rendezvous->save();
+
+        return redirect('ajrendezvous')->with('status', 'Le rendez-vous a bien été programmé.');
     }
 
     /**
