@@ -212,45 +212,59 @@
     <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
+        <h1 class="text-light">Vous souffrez d'un mal?</h1>
+        <h5 class="text-light">Prenez un rendez-vous</h5>
 
+        <form action="{{route('rendezvoust')}}" method="POST" class="form-group">
+          @csrf
         <div class="row">
-          <div class="col-lg-8 text-center text-lg-start">
-            <h3>Appel à l'action</h3>
-            <p> Vous souffrez d'un mal? Votre état de santé vous inquiète?.</p>
-          </div>
-          <div class="col-lg-4">
-
-            <!-- Button -->
-            <button type="button" class="cta-btn align-middle text-primary" data-bs-toggle="modal" data-bs-target="#modal1"> Prenez un rendez-vous</button>
-            
-            <!-- Modal -->
-            <div class="modal fade" id="modal1">
-              <div class="modal dialog">
-
-                <div class="modal content">
-
-                  <div class="modal-header">
-                    <h5 class="modal title" aria-labelledby="modal title">Modal Title</h5>
-                    <button class="btn close" data-bs-dismiss="modal" aria-label="close"></button>
-                  </div>
-                  
-                  <div class="modal-body" aria-describedby="content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem fugiat 
-                      assumenda corporis harum quo nihil eaque? Eligendi et perspiciatis
-                       consequuntur laborum totam ea, aperiam debitis at nihil eos? Ut, quidem?</p>
-                  </div>
-
-                  <div class="modal footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <button class="btn btn-primary">Enregistrer</button>
-                  </div>
-                </div>
-              </div>
-
-
+          <div class="col-lg-6">
+            <div class="">
+              <label class="text-light">Nom</label>
+              <input type="text" name="nom" class="form-control"  required>
+            </div>
+            <div class="">
+              <label class="text-light">Téléphone</label>
+              <input type="number" class="form-control" name="telephone" required>
             </div>
           </div>
+          <div class="col-lg-6">
+            <div class="">
+              <label class="text-light">Prénom</label>
+              <input type="text" name="prenom" class="form-control"  required>
+            </div>
+            <div class="">
+              <label class="text-light">Service</label>
+              <select class="form-select" name="service" aria-label="Default select example" required> 
+                <option value="Masculin">Services infirmiers de base</option>
+                <option value="Feminin">Médecine générale</option>
+                <option value="Feminin">Chirugie</option>
+                <option value="Feminin">Pédiatrie</option>
+            </select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="">
+              <label class="text-light">Date</label>
+              <input type="date" class="form-control" name="date" required>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="">
+              <label class="text-light">Heure</label>
+              <input type="time" name="heure" class="form-control"  required>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <label class="text-light">Qu'avez-vous?</label>
+            <textarea class="form-control" placeholder="Décrivez votre mal" name="message" rows="10" required></textarea>
+          </div>
+
+          <div class="text-center mt-3"><button class="btn btn-warning" type="submit">Prendre un rendez-vous</button></div>
+        
         </div>
+      </form>
+
 
       </div>
     </section><!-- End Cta Section -->

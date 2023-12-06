@@ -13,7 +13,7 @@ class DocteursController extends Controller
     public function docteurs()
     {
         $docteurs = docteurs::all();
-        return view('docteurs.docteurs', compact('docteurs'));
+        return view('docteurs', compact('docteurs'));
     }
 
     /**
@@ -21,7 +21,7 @@ class DocteursController extends Controller
      */
     public function ajdocteurs()
     {
-        return view('docteurs.ajdocteurs');
+        return view('ajdocteurs');
     }
 
     /**
@@ -39,35 +39,31 @@ class DocteursController extends Controller
         return redirect('ajdocteurs')->with('status', 'Le docteur a bien été ajouté.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    
+    public function update_docteurs($id)
     {
-        //
+        $docteurs = docteurs::find($id);
+       return view('mod_docteurs', compact('docteurs'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function uprendezvous(Request $request){
+        
+        $docteurs = docteurs::find($request->id);
+        $docteurs->nom = $request->nom;
+        $docteurs->prenom = $request->prenom;
+        $docteurs->fonction = $request->fonction;
+        $docteurs->sexe = $request->sexe;
+        $docteurs->update();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        return redirect('docteurs')->with('status', 'Le docteur a bien été modifié.');
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $docteurs = docteurs::find($id);
+        $docteurs->delete();
+        return redirect('docteurs')->with('status', 'Le docteur a bien été supprimé.');
     }
 }

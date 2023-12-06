@@ -13,7 +13,7 @@ class PatientsController extends Controller
     public function patients()
     {
         $patients = patients::all();
-        return view('patients.patients', compact('patients'));
+        return view('patients', compact('patients'));
     }
 
     /**
@@ -21,7 +21,7 @@ class PatientsController extends Controller
      */
     public function ajpatients()
     {
-        //
+        return view('ajpatients');
     }
 
     /**
@@ -29,7 +29,14 @@ class PatientsController extends Controller
      */
     public function patientst(Request $request)
     {
-        //
+        $patients = new patients();
+        $patients->nom_prenom = $request->nom_prenom;
+        $patients->adresse = $request->adresse;
+        $patients->telephone = $request->telephone;
+        $patients->sexe = $request->sexe;
+        $patients->save();
+
+        return redirect('patients')->with('status', 'Patient a bien été ajouté.');
     }
 
     /**
@@ -40,27 +47,30 @@ class PatientsController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update_patients($id)
     {
-        //
+        $patients = patients::find($id);
+       return view('mod_patients', compact('patients'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function uppatientst(Request $request){
+        
+        $patients = patients::find($request->id);
+        $patients->nom_prenom = $request->nom_prenom;
+        $patients->adresse = $request->adresse;
+        $patients->telephone = $request->telephone;
+        $patients->sexe = $request->sexe;
+        $patients->update();
 
+        return redirect('patients')->with('status', 'Patient a bien été modifié.');
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $patients = patients::find($id);
+        $patients->delete();
+        return redirect('patients')->with('status', 'Patient a bien été supprimé.');
     }
 }

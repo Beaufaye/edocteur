@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('rendezvouses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('telephone');
+            $table->string('service');
+            $table->string('date');
+            $table->string('heure');
+            $table->string('message');
+           $table->timestamps();
         });
     }
 

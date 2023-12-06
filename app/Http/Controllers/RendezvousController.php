@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\rendezvous;
+use App\Models\patients;
 
 class RendezvousController extends Controller
 {
@@ -13,7 +14,7 @@ class RendezvousController extends Controller
     public function rendezvous()
     {
         $rendezvous = rendezvous::all();
-        return view('rendez-vous.rendezvous', compact('rendezvous'));
+        return view('rendezvous', compact('rendezvous'));
     }
 
     /**
@@ -21,7 +22,8 @@ class RendezvousController extends Controller
      */
     public function ajrendezvous()
     {
-        return view('rendez-vous.rendezvous');
+        $patients = patients::all();
+        return view('ajrendezvous', compact('patients'));
     }
 
     /**
@@ -32,42 +34,43 @@ class RendezvousController extends Controller
         $rendezvous = new rendezvous();
         $rendezvous->nom = $request->nom;
         $rendezvous->prenom = $request->prenom;
-        $rendezvous->fonction = $request->fonction;
-        $rendezvous->sexe = $request->sexe;
+        $rendezvous->telephone = $request->telephone;
+        $rendezvous->service = $request->service;
+        $rendezvous->date = $request->date;
+        $rendezvous->heure = $request->heure;
+        $rendezvous->message = $request->message;
         $rendezvous->save();
 
         return redirect('ajrendezvous')->with('status', 'Le rendez-vous a bien été programmé.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update_rendezvous($id)
     {
-        //
+        $rendezvous = rendezvous::find($id);
+       return view('mod_rendezvous', compact('rendezvous'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function uprendezvous(Request $request){
+        
+        $rendezvous = rendezvous::find($request->id);
+        $rendezvous->nom = $request->nom;
+        $rendezvous->prenom = $request->prenom;
+        $rendezvous->telephone = $request->telephone;
+        $rendezvous->service = $request->service;
+        $rendezvous->date = $request->date;
+        $rendezvous->heure = $request->heure;
+        $rendezvous->message = $request->message;
+        $rendezvous->update();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        return redirect('rendezvous')->with('status', 'Le rendez-vous a bien été modifié.');
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $rendezvous = rendezvous::find($id);
+        $rendezvous->delete();
+        return redirect('rendezvous')->with('status', 'Le rendez-vous a bien été supprimé.');
     }
 }
